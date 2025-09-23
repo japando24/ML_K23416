@@ -8,7 +8,7 @@ class TextTranslatorApp:
         root.title("Text Translator (ChatGPT)")
 
         # Khởi tạo client OpenAI
-        self.client = OpenAI(api_key="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")  # <- thay bằng API key của bạn
+        self.client = OpenAI(api_key="")  # <- thay bằng API key của bạn
 
         self.create_widgets()
 
