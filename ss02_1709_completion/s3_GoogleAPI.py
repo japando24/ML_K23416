@@ -1,14 +1,18 @@
 import tkinter as tk
 from tkinter import ttk
 from openai import OpenAI
-
+import os
+from dotenv import load_dotenv
+load_dotenv(dotenv_path=".env")
+OPENAI_API_KEY = os.getenv("OPEN_AI_KEY")
+print("Open ai key:",OPENAI_API_KEY)
 class TextTranslatorApp:
     def __init__(self, root):
         self.root = root
         root.title("Text Translator (ChatGPT)")
 
         # Khởi tạo client OpenAI
-        self.client = OpenAI(api_key="")  # <- thay bằng API key của bạn
+        self.client = OpenAI(api_key=OPENAI_API_KEY)
 
         self.create_widgets()
 
