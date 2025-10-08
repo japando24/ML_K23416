@@ -234,7 +234,7 @@ conn = mysql.connector.connect(
 # print(cursor.rowcount," record(s) affected")
 
 # #5.1 Xóa Student có ID=9
-# conn = mysql.connector.connect(
+# conn = mysql.connectors.connect(
 #                 host=server,
 #                 port=port,
 #                 database=database,
