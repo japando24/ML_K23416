@@ -1,7 +1,9 @@
 
-from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QMessageBox, QMainWindow
+
 
 from ss05_0810_retail.retail_project.connectors.employee_connector import EmployeeConnector
+from ss05_0810_retail.retail_project.ui.EmployeeMainWindowEx import EmployeeMainWindowEx
 from ss05_0810_retail.retail_project.ui.LoginMainWindow import Ui_MainWindow
 
 
@@ -24,15 +26,18 @@ class LoginMainWindowEx(Ui_MainWindow):
         ec.connect()
         em = ec.login(email, pwd)
         if em == None:
-            msg=QMessageBox()
-            msg.setIcon(QMessageBox.Icon.Critical)
-            msg.setText("Login Failed, please check your account again")
-            msg.setWindowTitle("Login Failed")
-            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
-        else:
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Icon.Information)
-            msg.setText("Congratulations! login successful!!!")
-            msg.setWindowTitle("Login OK OK")
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.setText("Login Failed, please check your account again!!")
+            msg.setWindowTitle("Login Failed :((")
             msg.setStandardButtons(QMessageBox.StandardButton.Ok)
-        msg.exec()
+            msg.exec()
+        else:
+            self.gui_emp=EmployeeMainWindowEx()
+            self.gui_emp.setupUi(QMainWindow())
+            self.gui_emp.showWindow()
+            self.MainWindow.close()
+
+
+
+
