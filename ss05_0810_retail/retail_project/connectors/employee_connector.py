@@ -50,7 +50,6 @@ class EmployeeConnector (Connector):
         result=self.insert_one(sql, val)
         return result
     def update_one_employee(self,emp):
-
         sql="UPDATE `employee` "\
             " SET "\
             " `EmployeeCode` = %s, "\
@@ -63,4 +62,8 @@ class EmployeeConnector (Connector):
         val =(emp.EmployeeCode,emp.Name,emp.Phone,emp.Email,emp.IsDeleted,emp.Password,emp.ID)
         result =self.insert_one(sql,val)
         return result
-
+    def delete_one_employee(self, emp):
+        sql= "DELETE FROM employee WHERE `ID` = %s"
+        val=(emp.ID,) #NHỚ CÓ DẤU PHẨY GHI CÓ 1 đối số, 2 cái thì ko
+        result = self.insert_one(sql, val)
+        return result

@@ -142,7 +142,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../images/z6966680334342_f8ccd842a360292e803daa3fc96b4e50.jpg</pixmap>
+     <pixmap>../images/ig_profile.jpg</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>

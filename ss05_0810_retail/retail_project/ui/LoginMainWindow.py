@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'D:\Studying_Coding\ML_K23416\ss05_0810_retail\retail_project\ui\LoginMainWindow.ui'
+# Form implementation generated from reading ui file 'D:\Coding\ML_K23416\ss05_0810_retail\retail_project\ui\LoginMainWindow.ui'
 #
 # Created by: PyQt6 UI code generator 6.7.1
 #
@@ -36,19 +36,19 @@ class Ui_MainWindow(object):
         self.pushButton_Login = QtWidgets.QPushButton(parent=self.groupBox)
         self.pushButton_Login.setGeometry(QtCore.QRect(30, 160, 93, 28))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("D:\\Studying_Coding\\ML_K23416\\ss05_0810_retail\\retail_project\\ui\\../images/icon_login.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("D:\\Coding\\ML_K23416\\ss05_0810_retail\\retail_project\\ui\\../images/icon_login.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_Login.setIcon(icon)
         self.pushButton_Login.setObjectName("pushButton_Login")
         self.pushButton_Exit = QtWidgets.QPushButton(parent=self.groupBox)
         self.pushButton_Exit.setGeometry(QtCore.QRect(160, 160, 93, 28))
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("D:\\Studying_Coding\\ML_K23416\\ss05_0810_retail\\retail_project\\ui\\../images/icon_exit.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("D:\\Coding\\ML_K23416\\ss05_0810_retail\\retail_project\\ui\\../images/icon_exit.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_Exit.setIcon(icon1)
         self.pushButton_Exit.setObjectName("pushButton_Exit")
         self.label_3 = QtWidgets.QLabel(parent=self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(20, 30, 211, 201))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("D:\\Studying_Coding\\ML_K23416\\ss05_0810_retail\\retail_project\\ui\\../images/z6966680334342_f8ccd842a360292e803daa3fc96b4e50.jpg"))
+        self.label_3.setPixmap(QtGui.QPixmap("D:\\Coding\\ML_K23416\\ss05_0810_retail\\retail_project\\ui\\../images/ig_profile.jpg"))
         self.label_3.setScaledContents(True)
         self.label_3.setObjectName("label_3")
         MainWindow.setCentralWidget(self.centralwidget)

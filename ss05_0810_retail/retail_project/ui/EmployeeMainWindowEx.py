@@ -11,10 +11,12 @@ class EmployeeMainWindowEx(Ui_MainWindow):
     def __init__(self):
         self.ec = EmployeeConnector()
         self.ec.connect()
+        self.is_completed = False
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)
         self.MainWindow=MainWindow
         self.displayEmployeeIntoTable()
+        self.is_completed=True
         self.setupSignalAndSlot()
     def showWindow(self):
         self.MainWindow.show()
@@ -49,6 +51,8 @@ class EmployeeMainWindowEx(Ui_MainWindow):
         self.pushButton_New.clicked.connect(self.clear_all)
         self.tableWidget_Employee.itemSelectionChanged.connect(self.show_detail)
         self.pushButton_Save.clicked.connect(self.save_employee)
+        self.pushButton_Update.clicked.connect(self.update_employee)
+        self.pushButton_Delete.clicked.connect(self.delete_employee)
     def clear_all(self):
         self.lineEdit_ID.setText("")
         self.lineEdit_Code.setText("")
@@ -57,6 +61,8 @@ class EmployeeMainWindowEx(Ui_MainWindow):
         self.lineEdit_Email.setText("")
         self.lineEdit_Code.setFocus()
     def show_detail(self):
+        if self.is_completed == False:
+            return
         row_index = self.tableWidget_Employee.currentIndex()
         print("You clicked on row ", row_index.row())
         id=self.tableWidget_Employee.item(row_index.row(), 0).text()
@@ -73,6 +79,7 @@ class EmployeeMainWindowEx(Ui_MainWindow):
             else:
                 self.checkBox_IsDeleted.setChecked(False)
     def save_employee (self):
+        self.is_completed = False
         emp = Employee()
         emp.EmployeeCode = self.lineEdit_Code.text()
         emp.Name = self.lineEdit_Name.text()
@@ -91,3 +98,46 @@ class EmployeeMainWindowEx(Ui_MainWindow):
             msg.setWindowTitle("Error!!!")
             msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             msg.exec()
+        self.is_completed = True
+
+    def update_employee(self):
+        self.is_completed = False
+        emp = Employee()
+        emp.ID = self.lineEdit_ID.text()
+        emp.EmployeeCode = self.lineEdit_Code.text()
+        emp.Name = self.lineEdit_Name.text()
+        emp.Phone = self.lineEdit_Phone.text()
+        emp.Email = self.lineEdit_Email.text()
+        emp.Password = self.lineEdit_Password.text()
+        if self.checkBox_IsDeleted.isChecked() == True:
+            emp.IsDeleted = 1
+        else:
+            emp.IsDeleted = 0
+
+        result = self.ec.update_one_employee(emp)
+        if result > 0:
+            self.displayEmployeeIntoTable()
+        else:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.setText("Update Fail")
+            msg.setWindowTitle("Error!!!")
+            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+            msg.exec()
+        self.is_completed = True
+    def delete_employee(self):
+        self.is_completed = False
+        emp = Employee()
+        emp.ID = self.lineEdit_ID.text()
+        result = self.ec.delete_one_employee(emp)
+        if result > 0:
+            self.displayEmployeeIntoTable()
+        else:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.setText("Delete Fail")
+            msg.setWindowTitle("Error!!!")
+            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+            msg.exec()
+        self.is_completed = True
+
