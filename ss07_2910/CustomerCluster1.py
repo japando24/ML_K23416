@@ -65,3 +65,66 @@ def showHistogram(df, columns):
     plt.show()
 
 showHistogram(df2,df2.columns[1:])
+
+def elbowMethod(df, columnsForElbow):
+    X = df. loc[:, columnsForElbow].values
+    inertia = []
+    for n in range(1 , 11):
+        model = KMeans(n_clusters = n,
+                       init='k-means++',
+                       max_iter=500,
+                       random_state=42)
+
+        # -init: dùng k-means++
+        # -max_iter: 500 lần
+        # -random_state=42 để dùng cùng 1 phân bố dữ liệu chỗ mỗi lần chạy đảm bảo nhất quán
+        model.fit(X)
+        inertia.append(model.inertia_)
+    plt.figure(1, figsize=(15, 6))
+    plt.plot(np.arange(1, 11), inertia, 'o')
+    plt.plot(np.arange(1, 11), inertia, '-', alpha=0.5)
+    plt.xlabel('Number of Clusters'), plt.ylabel('Cluster sum of squared distances')
+    plt.show()
+
+columns = ['Age','Spending Score']
+elbowMethod(df2, columns)
+
+def runKMeans(X, cluster):
+    model = KMeans(n_clusters = cluster,
+                   init='k-means++',
+                   max_iter=500,
+                   random_state=42)
+    model.fit(X)
+    labels = model.labels_
+    centroids = model.cluster_centers_
+    y_kmeans = model.fit_predict(X)
+    return y_kmeans, centroids, labels
+
+X = df2.loc[:, columns].values
+cluster = 4
+colors=["red","green", "blue", "purple", "black", "pink", "orange"]
+
+y_kmeans, centroids, labels=runKMeans(X, cluster)
+print(y_kmeans)
+print(centroids)
+print(labels)
+df2["cluster"]=labels
+
+def visualizeKMeans(X, y_kmeans, cluster, title, xlabel, ylabel, colors):
+    plt.figure(figsize=(10, 10))
+    for i in range(cluster):
+        plt.scatter(X[y_kmeans == i, 0],
+                    X[y_kmeans == i, 1],
+                    s=100,
+                    c=colors[i],
+                    label='Cluster %i'%(i+1))
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt. legend()
+    plt.show()
+
+visualizeKMeans(X, y_kmeans, cluster,
+                "Clusters of Customers - Age X Spending Score",
+                "Age","Spending Score", colors)
+
